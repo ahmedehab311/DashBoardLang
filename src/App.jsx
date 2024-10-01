@@ -38,9 +38,14 @@ function App() {
   const handleAddLocale = (newLocale, isDefault) => {
     setLocaleData((prevData) => [newLocale, ...prevData]);
 
-    if (isDefault) {
+    if (isDefault === "Yes") {
       setCurrentDefault(newLocale);
+      localStorage.setItem("currentDefault", JSON.stringify(newLocale));
     }
+
+    // Update locales in localStorage
+    // const updatedLocaleData = [newLocale, ...localeData];
+    // localStorage.setItem("locales", JSON.stringify(updatedLocaleData));
   };
 
   const handleEditLocale = (index) => {
@@ -52,8 +57,11 @@ function App() {
     const newLocaleData = localeData.filter((_, i) => i !== index);
     setLocaleData(newLocaleData);
     localStorage.setItem("locales", JSON.stringify(newLocaleData));
-    setCurrentDefault(null);
-  };
+    if (currentDefault && localeData[index].language === currentDefault.language) {
+      setCurrentDefault(null);
+      localStorage.removeItem("currentDefault");
+    }
+    }
 
   return (
     <div className="p-6">

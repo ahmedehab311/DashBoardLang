@@ -194,12 +194,12 @@ function LocaleTable({ localeData, onEditLocale, onRemoveLocale,currentDefault }
             {filteredLocales.map((locale, index) => (
               <tr key={index} className="border-b">
                 <td className="p-2 text-center">{locale.flag}</td>
-                <td className="p-2 text-center">
-                {locale.language}
-                {currentDefault && currentDefault.language === locale.language && (
-                  <span className="ml-2 text-green-500"> (Current Default)</span>
-                )}
-              </td>
+              <td>
+              {locale.language}
+              {currentDefault && currentDefault.language === locale.language && (
+                <span className="ml-2 text-green-500 text-center"> (Current Default)</span>
+              )}
+            </td>
                 <td className="p-2 text-center">{locale.direction}</td>
                 <td
                   className={`p-2 ${
